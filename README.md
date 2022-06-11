@@ -34,7 +34,7 @@ Be sure to change the permissions to executable by using chmod +x <filename>.
   
 Update grub using sudo update-grub and reboot.
 
-###CSM install
+### CSM install
 
 Because getting the UEFI method to work has not been successful for a lot of people, there is an alternative method. This involves install linux using CSM or bios compatibility mode. This is not ideal because UEFI has benefits over bios and because we do not have traditional access to a UEFI bios screen. To do this we will have to intall in UEFI and then make system changes from a live USB.
 
