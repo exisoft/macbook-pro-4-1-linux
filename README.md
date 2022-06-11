@@ -1,13 +1,13 @@
 # macbook-pro-4-1-linux
 a collection of tricks for installing linux on early 2007 macbook pros 4,1 pre unibody. Some of these things may apply to similar models
 
-##Aquiring and installing 340 NVIDIA drivers
+## Aquiring and installing 340 NVIDIA drivers
 
 It is important to note that before installing any nvidia drivers we must resolve a critical issue. Mac UEFI of this era have unique complexities that will not allow us to install working 340 drivers out of the box. Although I have seen attempts to resolve this issue through grub and uefi I have not been able to make it work. It's likely due to the different gpu/chipsets than the instructions I've found. The second best solution is to install linux in CSM mode. This is not ideal, but it does allow us to boot with the proprietary drivers!
 
 the following references a post on the Mint forums `https://forums.linuxmint.com/viewtopic.php?f=49&t=319324`
 
-##Change UEFI registers using setpci
+### Change UEFI registers using setpci
 
 *untested/not working*
 
@@ -34,7 +34,7 @@ Be sure to change the permissions to executable by using chmod +x <filename>.
   
 Update grub using sudo update-grub and reboot.
 
-##CSM install
+###CSM install
 
 Because getting the UEFI method to work has not been successful for a lot of people, there is an alternative method. This involves install linux using CSM or bios compatibility mode. This is not ideal because UEFI has benefits over bios and because we do not have traditional access to a UEFI bios screen. To do this we will have to intall in UEFI and then make system changes from a live USB.
 
@@ -48,11 +48,11 @@ Mount your system partition at /media using something like Disks. Change the dir
 
 If this installs cleanly you are done. You can now install the Nvidia 340 drivers.
   
-  *note that some distros like Ubuntu 21.10 and up have started shipping BOTH bios and UEFI grub versions. This may not appear to be a problem until you upgrade your distro so make sure that when you restart you check for the `grub-efi-amd64-signed` package and remove it. I had to unintall and reinstall grub-pc upgrading from 21.10 to 22.04 and that fixed the issue.
+  *note that some distros like Ubuntu 21.10 and up have started shipping BOTH bios and UEFI grub versions. This may not appear to be a problem until you upgrade your distro so make sure that when you restart you check for the `grub-efi-amd64-signed` package and remove it. I had to unintall and reinstall grub-pc upgrading from 21.10 to 22.04 and that fixed the issue.*
 
-##Installing Drivers
+## Installing Drivers
   
-###Ubuntu
+### Ubuntu
 
 add ppa and install drivers:
 ```
@@ -62,7 +62,7 @@ sudo apt install nvidia-graphics-drivers-340
 ```
 https://launchpad.net/~kelebek333/+archive/ubuntu/nvidia-legacy
 
-###Debian
+### Debian
 
 *untested*
 
@@ -84,11 +84,11 @@ install drivers
 
 `sudo apt install nvidia-graphics-drivers-legacy-340xx`
 
-###Arch
+### Arch
 
 stub
 
-##Fix AHCI when booting from CSM (bios compatability) mode
+## Fix AHCI when booting from CSM (bios compatability) mode
   
 When booting from CSM Apples firmware will automatically place drives in IDE mode instead of AHCI. This is solvable by adding commands from grub at boot. We can see this by typing lspci -nn in the terminal. The SATA controller with have [IDE mode] next to it.
 
