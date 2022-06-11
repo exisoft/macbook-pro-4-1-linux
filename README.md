@@ -36,7 +36,7 @@ Update grub using sudo update-grub and reboot.
 
 ### CSM install
 
-Because getting the UEFI method to work has not been successful for a lot of people, there is an alternative method. This involves install linux using CSM or bios compatibility mode. This is not ideal because UEFI has benefits over bios and because we do not have traditional access to a UEFI bios screen. To do this we will have to intall in UEFI and then make system changes from a live USB.
+Because getting the UEFI method to work has not been successful for a lot of people, there is an alternative method. This involves installing linux using CSM or bios compatibility mode. This is not ideal because UEFI has benefits over bios and because we do not have traditional access to a UEFI bios screen. To do this we will have to intall in UEFI and then make system changes from a live USB.
 
 Step one is to install linux normally. This will automatically setup UEFI. DO NOT INSTALL NVIDIA DRIVERS YET. After installation reboot back into your live USB environment. Open your partitioning tool of choice (Gparted if you use Ubuntu). Find your HDD often located at /dev/sda. Find the efi (hfs+?) and delete this partition. Create a new partition in that space and format it as cleared. Apply those changes and then add the bios_grub flag.
 
@@ -46,7 +46,7 @@ Mount your system partition at /media using something like Disks. Change the dir
 
 `sudo grub-install --no-uefi-secure-boot --boot-directory=/media/mint/<GUID>/boot /dev/sda`
 
-If this installs cleanly you are done. You can now install the Nvidia 340 drivers.
+If this installs cleanly you are done. You can now install the Nvidia 340 drivers after rebooting.
   
   *note that some distros like Ubuntu 21.10 and up have started shipping BOTH bios and UEFI grub versions. This may not appear to be a problem until you upgrade your distro so make sure that when you restart you check for the `grub-efi-amd64-signed` package and remove it. I had to unintall and reinstall grub-pc upgrading from 21.10 to 22.04 and that fixed the issue.*
 
