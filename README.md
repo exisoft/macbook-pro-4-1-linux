@@ -21,8 +21,8 @@ https://launchpad.net/~kelebek333/+archive/ubuntu/nvidia-legacy
 add a file in /etc/apt/preferences with
 
 > Package: *
-> Pin: release a=unstable
-> Pin-Priority: 100
+Pin: release a=unstable
+Pin-Priority: 100
 
 add a file in /etc/apt/sources.list.d with
 
