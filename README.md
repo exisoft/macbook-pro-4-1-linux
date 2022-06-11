@@ -38,7 +38,7 @@ Update grub using sudo update-grub and reboot.
 
 Because getting the UEFI method to work has not been successful for a lot of people, there is an alternative method. This involves installing linux using CSM or bios compatibility mode. This is not ideal because UEFI has benefits over bios and because we do not have traditional access to a UEFI bios screen. To do this we will have to intall in UEFI and then make system changes from a live USB.
 
-Step one is to install linux normally. This will automatically setup UEFI. DO NOT INSTALL NVIDIA DRIVERS YET. After installation reboot back into your live USB environment. Open your partitioning tool of choice (Gparted if you use Ubuntu). Find your HDD often located at /dev/sda. Find the efi (hfs+?) and delete this partition. Create a new partition in that space and format it as cleared. Apply those changes and then add the bios_grub flag.
+Step one is to install linux normally. This will automatically setup UEFI. DO NOT INSTALL NVIDIA DRIVERS YET. After installation reboot back into your live USB environment. Open your partitioning tool of choice (Gparted if you use Ubuntu). Find your HDD often located at /dev/sda. Find the efi (esp?) and delete this partition. Create a new partition in that space and format it as cleared. Apply those changes and then add the bios_grub flag.
 
 *DO NOT REBOOT BEFORE FOLLOWING THE NEXT STEP*
 
