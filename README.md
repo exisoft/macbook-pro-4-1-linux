@@ -20,15 +20,11 @@ setpci -s "01:00.0" 04.b=7
 ```
 You can then install the Nvidia drivers through the prefered method and reboot. Follow the same steps as above when you come to the grub menu. If it boots beyond a black screen you can make those settings permanent by adding a script in the /etc/grub.d folder. You should be able to name it something like 42_nvidia-fix as long as you arnt using 42 already. The script should look like
 
-```
-#!/bin/sh
-
-set -e
-
-## Enable nvidia proprietary drivers
-
-echo "setpci -s "00:01.0" 3e.b=a"
-echo "setpci -s "01:00.0" 04.b=7"
+```                                     
+cat << EOF
+setpci -s "00:1e.0" 3e.b=a
+setpci -s "01:00.0" 04.b=7
+EOF
 ```
 Be sure to change the permissions to executable by using chmod +x <filename>.
   
