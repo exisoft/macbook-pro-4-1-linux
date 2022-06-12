@@ -29,6 +29,8 @@ EOF
 Be sure to change the permissions to executable by using chmod +x <filename>.
   
 Update grub using sudo update-grub and reboot.
+  
+You can validate that the settings changed using `setpci -s "00:1e.0" 3e.b` and 'setpci -s "01:00.0" 04.b=7` from a terminal.
 
 ### CSM install
 
