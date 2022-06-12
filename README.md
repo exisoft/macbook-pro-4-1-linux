@@ -22,7 +22,7 @@ You can then install the Nvidia drivers through the prefered method and reboot. 
 
 ```                                     
 cat << EOF
-setpci -s "00:1e.0" 3e.b=a
+setpci -s "00:01.0" 3e.b=a
 setpci -s "01:00.0" 04.b=7
 EOF
 ```
