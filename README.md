@@ -15,7 +15,7 @@ To get this to work you need to be sending these commands through the grub inter
 
 enable the grub boot menu by editing /etc/default/grub and commenting out `#GRUB_TIMEOUT_STYLE=hidden` and changing the value of `GRUB-TIMEOUT` to a reasonable value (reads as seconds). Run the command `sudo update-grub` and reboot when complete. When the new grub menu comes up press c to drop into the grub command line. Enter these commands seperately
 ```
-setpci -s "00:01.0" 3e.b=8
+setpci -s "00:01.0" 3e.b=8 ##currently this will not set properly and reads 0a when booted through grub. Weirdly when booted through refind it produces 02
 setpci -s "01:00.0" 04.b=7
 ```
 You can then install the Nvidia drivers through the prefered method and reboot. Follow the same steps as above when you come to the grub menu. If it boots beyond a black screen you can make those settings permanent by adding a script in the /etc/grub.d folder. You should be able to name it something like 42_nvidia-fix as long as you arnt using 42 already. The script should look like
