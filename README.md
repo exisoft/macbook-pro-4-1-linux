@@ -15,13 +15,15 @@ To get this to work you need to be sending these commands through the grub inter
 
 enable the grub boot menu by editing /etc/default/grub and commenting out `#GRUB_TIMEOUT_STYLE=hidden` and changing the value of `GRUB-TIMEOUT` to a reasonable value (reads as seconds). Run the command `sudo update-grub` and reboot when complete. When the new grub menu comes up press c to drop into the grub command line. Enter these commands seperately
 ```
-##currently this will not set properly and reads 0a when booted through grub. Weirdly when booted through refind it produces 02
 setpci -s "00:01.0" 3e.b=8
 setpci -s "01:00.0" 04.b=7
 ```
+**this appears to work but does not hold when I escape out and try to boot the kernel, possibly needs to be booted through the grub commandline which I can not quite understand yet**
+
 You can then install the Nvidia drivers through the prefered method and reboot. Follow the same steps as above when you come to the grub menu. If it boots beyond a black screen you can make those settings permanent by adding a script in the /etc/grub.d folder. You should be able to name it something like 42_nvidia-fix as long as you arnt using 42 already. The script should look like
 
-```                                     
+```
+##currently this will not set properly and reads 0a when booted through grub.
 cat << EOF
 setpci -s "00:01.0" 3e.b=8
 setpci -s "01:00.0" 04.b=7
@@ -92,4 +94,10 @@ stub
 When booting from CSM Apples firmware will automatically place drives in IDE mode instead of AHCI. This is solvable by adding commands from grub at boot. We can see this by typing lspci -nn in the terminal. The SATA controller will have [IDE mode] next to it.
 
 We can test our solution by booting into the grub menu and pressing c. From here we can enter `setpci -d 8086:2828 90.b=40` and using `lspci` we should see that the SATA controller now says AHCI mode. I believe you can type `boot` from here to boot into your system. To make this fix permanant we can add a script to /etc/grub.d. Since we are not using the UEFI fix mentioned above you should be able to name this file something like 42_ahci-fix. Make the file executable using `chmod +x <filename>` replacing <filename> with the name you chose. Run `sudo update-grub` and when you reboot it should automatically have set the SATA controller to AHCI mode. You can check again using lspci -nn.
-
+  
+```
+#!/bin/sh
+set -e
+## Enable nvidia proprietary drivers
+echo "setpci -d 8086:2828 90.b=40"
+```
