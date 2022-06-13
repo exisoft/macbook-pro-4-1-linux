@@ -43,9 +43,9 @@ Step one is to install linux normally. This will automatically setup UEFI. DO NO
 
 *DO NOT REBOOT BEFORE FOLLOWING THE NEXT STEP*
 
-Mount your system partition at /media using something like Disks. Change the directory to /media and find your partition then check in that directory to find and copy the GUID-name directory. Run the following command replacing <GUID> with the name of your directory
+Mount your system partition at /media using something like Disks. Change the directory to /media and find your partition then check in that directory to find and copy the path to the GUID-name directory. Run the following command replacing <path to system partition> with the name of your directory
 
-`sudo grub-install --no-uefi-secure-boot --boot-directory=/media/mint/<GUID>/boot /dev/sda`
+`sudo grub-install --no-uefi-secure-boot --boot-directory=<path to system parition>/boot /dev/sda`
 
 If this installs cleanly you are done. You can now install the Nvidia 340 drivers after rebooting.
   
@@ -98,6 +98,6 @@ We can test our solution by booting into the grub menu and pressing c. From here
 ```
 #!/bin/sh
 set -e
-## Enable nvidia proprietary drivers
+## Enable achi in grub
 echo "setpci -d 8086:2828 90.b=40"
 ```
